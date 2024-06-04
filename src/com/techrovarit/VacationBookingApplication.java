@@ -116,6 +116,7 @@ public class VacationBookingApplication {
             case "1":
                 bookingType = "Hotel";
                 break;
+
             case "2":
                 bookingType = "Apartment";
                 break;
@@ -167,56 +168,6 @@ public class VacationBookingApplication {
         }
     }
 
-    public static void myTotalVacations(String directoryPath) {
-        String jsonFilePath = directoryPath + File.separator + "vacation_details.json";
-
-        try {
-            String content = new String(Files.readAllBytes(Paths.get(jsonFilePath)));
-            JSONArray vacationArray;
-            try {
-                vacationArray = new JSONArray(content);
-            } catch (JSONException e) {
-                System.out.println("The vacation details file is not in the correct format.");
-                return;
-            }
-
-            if (vacationArray.length() > 0) {
-                System.out.println("Total vacations:");
-
-                for (int i = 0; i < vacationArray.length(); i++) {
-                    JSONObject vacation = vacationArray.getJSONObject(i);
-                    System.out.println("Vacation " + (i + 1) + ":");
-                    System.out.println("  Destination: " + vacation.getString("destination"));
-                    System.out.println("  Dates: " + vacation.getString("dates"));
-                }
-            } else {
-                System.out.println("No vacation details found.");
-            }
-        } catch (IOException e) {
-            System.out.println("An error occurred while reading the JSON file: " + e.getMessage());
-        }
-    }
-
-    public static void payBill(Scanner sc, String directoryPath) {
-        System.out.println("Enter the payment Bill");
-        Double paymentBill = sc.nextDouble();
-        sc.nextLine(); // Consume newline
-
-        System.out.println("Enter the payment Method");
-        String paymentMethod = sc.nextLine();
-
-        JSONObject paymentDetails = new JSONObject();
-        paymentDetails.put("paymentBill", paymentBill);
-        paymentDetails.put("PaymentMethod", paymentMethod);
-
-        String jsonFilePath = directoryPath + File.separator + "payment_details.json";
-        try (FileWriter fileWriter = new FileWriter(jsonFilePath)) {
-            fileWriter.write(paymentDetails.toString());
-            System.out.println("Payment Details have been saved successfully");
-        } catch (IOException e) {
-            System.out.println("An error occurred while saving the payment method: " + e.getMessage());
-        }
-    }
 
     public static void main(String[] args) {
         int choice;
@@ -238,12 +189,7 @@ public class VacationBookingApplication {
                 case 2:
                     bookVacation(sc, directoryPath);
                     break;
-                case 3:
-                    myTotalVacations(directoryPath);
-                    break;
-                case 4:
-                    payBill(sc, directoryPath);
-                    break;
+
                 case 5:
                     System.out.println("Thank You");
                     sc.close();
