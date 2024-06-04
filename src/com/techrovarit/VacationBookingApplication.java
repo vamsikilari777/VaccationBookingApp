@@ -16,21 +16,21 @@ public class VacationBookingApplication {
 
     public static void register(Scanner sc, String directoryPath) {
         User user = new User();
-        int randomNumber = (int) (Math.random() * 10000); // You can adjust this range as needed
+        int randomNumber = (int) (Math.random() * 10000); 
 
-        // Name of the folder
+       
         String folderName = "acc_" + randomNumber;
 
 
-        // Create File object representing the folder
+       
         File folder = new File(directoryPath, folderName);
         System.out.println(folder);
-        // Check if the folder already exists
+       
         if (!folder.exists()) {
-            // Attempt to create the directory
-            boolean folderCreated = folder.mkdirs(); // mkdirs() creates parent directories if they do not exist
+            
+            boolean folderCreated = folder.mkdirs(); 
 
-            // Check if the directory creation was successful
+            
             if (folderCreated) {
                 System.out.println("Folder created successfully: " + folder.getAbsolutePath());
             } else {
@@ -48,7 +48,7 @@ public class VacationBookingApplication {
 
         System.out.println("Enter the Age");
         user.setAge(sc.nextInt());
-        sc.nextLine(); // Consume newline character
+        sc.nextLine();
 
         System.out.println("Enter the Gender");
         user.setGender(sc.nextLine());
@@ -58,7 +58,7 @@ public class VacationBookingApplication {
 
         System.out.println("Enter the phone number");
         user.setPhone_Number(sc.nextLong());
-        sc.nextLine(); // Consume newline character
+        sc.nextLine(); 
 
         JSONArray bookingDetails = new JSONArray();
         JSONObject jsonObject = new JSONObject();
@@ -85,7 +85,7 @@ public class VacationBookingApplication {
             } else {
                 jsonArray = new JSONArray();
             }
-            jsonArray.put(jsonObject); // Append new registration to the array
+            jsonArray.put(jsonObject);
             System.out.println(jsonArray);
             try (FileWriter fileWriter = new FileWriter(jsonFilePath)) {
                 fileWriter.write(jsonArray.toString());
@@ -172,7 +172,7 @@ public class VacationBookingApplication {
     public static void main(String[] args) {
         int choice;
         Scanner sc = new Scanner(System.in);
-        String directoryPath = "C:\\Users\\VAMSI K\\Desktop\\myProject";
+        String directoryPath = "C:\\Users\\VAMSI K\\Desktop\\VacationBookingApp";
 
         do {
             System.out.println("1. register \n2. book vacation \n3. my total vacations \n4. pay bill \n5. close");
